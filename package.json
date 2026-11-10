@@ -12,10 +12,5 @@
     "astro": "^4.16.18",
     "@astrojs/tailwind": "^5.1.4",
     "tailwindcss": "^3.4.17"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-darwin-arm64": "4.68.2",
-    "@rollup/rollup-darwin-x64": "4.68.2",
-    "@rollup/rollup-linux-x64-gnu": "4.68.2"
   }
 }
