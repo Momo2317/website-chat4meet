@@ -1,14 +1,18 @@
 ---
 import { Image } from "astro:assets";
 import { site } from "../config/site";
-import IphoneMockup from "./IphoneMockup.astro";
 import wordmark from "../assets/brand/chat4meet_white_logo.png";
 import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
+import story1 from "../assets/brand/stories/story_1.png";
+import story2 from "../assets/brand/stories/story_2.png";
+import story3 from "../assets/brand/stories/story_3.png";
+import story4 from "../assets/brand/stories/story_4.png";
+import story5 from "../assets/brand/stories/story_5.png";
 
-const storyPeople = [
-  { initial: "A", name: "Alex", tone: "#0d9488" },
-  { initial: "M", name: "Maya", tone: "#0891b2" },
-  { initial: "J", name: "Jules", tone: "#059669" },
+const storyRail = [
+  { img: story1, name: "Alex" },
+  { img: story2, name: "Maya" },
+  { img: story3, name: "Jules" },
 ] as const;
 ---
 
@@ -55,150 +59,191 @@ const storyPeople = [
       <p class="mt-6 text-sm text-white/70">{site.tagline}</p>
     </div>
 
-    <div class="relative mx-auto w-full max-w-[300px]">
-      <IphoneMockup>
-        <div class="chat-ui">
-          <header class="chat-ui__header">
-            <Image src={mark} alt="" width={32} height={32} class="h-8 w-8 rounded-xl" />
-            <div>
-              <p class="text-[13px] font-semibold leading-none text-white">{site.name}</p>
-              <p class="mt-1 text-[11px] text-white/75">Online · close friends</p>
-            </div>
-          </header>
+    <div class="hero-rise relative mx-auto w-full max-w-[380px]" style="animation-delay: 120ms">
+      <div class="app-preview" aria-label="Chat4Meet app preview">
+        <header class="app-preview__header">
+          <Image src={mark} alt="" width={36} height={36} class="h-9 w-9 rounded-xl" />
+          <div>
+            <p class="text-sm font-semibold leading-none text-white">{site.name}</p>
+            <p class="mt-1 text-xs text-white/75">Online · close friends</p>
+          </div>
+        </header>
 
-          <div class="chat-ui__body">
-            <div class="chat-ui__stories" aria-hidden="true">
-              {
-                storyPeople.map((person) => (
-                  <figure class="flex w-12 flex-col items-center gap-1">
-                    <span class="story-ring block">
-                      <span
-                        class="flex h-11 w-11 items-center justify-center rounded-full text-sm font-semibold text-white"
-                        style={`background:${person.tone}`}
-                      >
-                        {person.initial}
-                      </span>
-                    </span>
-                    <figcaption class="text-[10px] text-ink-muted">{person.name}</figcaption>
-                  </figure>
-                ))
-              }
-            </div>
+        <div class="app-preview__stories">
+          {
+            storyRail.map((person) => (
+              <figure class="flex w-[4.25rem] shrink-0 flex-col items-center gap-1.5">
+                <span class="story-ring block">
+                  <Image
+                    src={person.img}
+                    alt=""
+                    width={56}
+                    height={56}
+                    class="h-14 w-14 object-cover"
+                  />
+                </span>
+                <figcaption class="text-[11px] text-ink-muted">{person.name}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
 
-            <div class="chat-ui__thread">
-              <div class="chat-ui__row">
-                <span class="chat-ui__avatar" style="background:#0d9488">M</span>
-                <div class="chat-ui__bubble chat-ui__bubble--in">
-                  Are you free after 7?
-                </div>
-              </div>
-              <div class="chat-ui__bubble chat-ui__bubble--out">
-                Yes — same café as last time?
-              </div>
-              <div class="chat-ui__row">
-                <span class="chat-ui__avatar" style="background:#0d9488">M</span>
-                <div class="chat-ui__bubble chat-ui__bubble--in">
-                  Perfect. I’ll send a story when I’m nearby.
-                </div>
-              </div>
+        <div class="app-preview__thread">
+          <div class="app-preview__row">
+            <Image
+              src={story2}
+              alt=""
+              width={32}
+              height={32}
+              class="h-8 w-8 rounded-full object-cover"
+            />
+            <div class="app-preview__bubble app-preview__bubble--in">
+              Are you free after 7?
             </div>
+          </div>
 
-            <div class="chat-ui__composer">Message…</div>
+          <div class="app-preview__bubble app-preview__bubble--out">
+            Yes — same café as last time?
+          </div>
+
+          <div class="app-preview__row">
+            <Image
+              src={story2}
+              alt=""
+              width={32}
+              height={32}
+              class="h-8 w-8 rounded-full object-cover"
+            />
+            <div class="overflow-hidden rounded-2xl border border-surface-border shadow-sm">
+              <Image
+                src={story5}
+                alt="Shared moment from Chat4Meet"
+                width={280}
+                height={180}
+                class="h-36 w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div class="app-preview__row">
+            <Image
+              src={story2}
+              alt=""
+              width={32}
+              height={32}
+              class="h-8 w-8 rounded-full object-cover"
+            />
+            <div class="app-preview__bubble app-preview__bubble--in">
+              Perfect. I’ll send a story when I’m nearby.
+            </div>
           </div>
         </div>
-      </IphoneMockup>
+
+        <div class="app-preview__composer">Message…</div>
+      </div>
+
+      <div class="app-preview__float" aria-hidden="true">
+        <Image
+          src={story4}
+          alt=""
+          width={120}
+          height={160}
+          class="h-28 w-20 rounded-2xl object-cover shadow-lift ring-2 ring-white/70 md:h-32 md:w-24"
+        />
+        <Image
+          src={story3}
+          alt=""
+          width={120}
+          height={160}
+          class="mt-6 h-24 w-[4.5rem] rounded-2xl object-cover shadow-soft ring-2 ring-white/60 md:h-28 md:w-20"
+        />
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .chat-ui {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
+  .app-preview {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 1.75rem;
     background: #f4fbfb;
+    box-shadow: 0 28px 60px rgb(0 60 60 / 0.28);
   }
 
-  .chat-ui__header {
+  .app-preview__header {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
-    background: #009c9c;
-    padding: 2rem 0.85rem 0.85rem;
-  }
-
-  .chat-ui__body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
     gap: 0.75rem;
-    padding: 0.75rem 0.7rem 0.7rem;
-    min-height: 0;
+    background: #009c9c;
+    padding: 1.15rem 1.1rem;
   }
 
-  .chat-ui__stories {
+  .app-preview__stories {
     display: flex;
-    gap: 0.55rem;
+    gap: 0.75rem;
     overflow: hidden;
+    padding: 1rem 1rem 0.35rem;
   }
 
-  .chat-ui__thread {
+  .app-preview__thread {
     display: flex;
-    flex: 1;
     flex-direction: column;
-    gap: 0.55rem;
-    justify-content: flex-end;
-    min-height: 0;
+    gap: 0.7rem;
+    padding: 0.85rem 1rem 0.35rem;
   }
 
-  .chat-ui__row {
+  .app-preview__row {
     display: flex;
     align-items: flex-end;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
-  .chat-ui__avatar {
-    display: inline-flex;
-    height: 1.55rem;
-    width: 1.55rem;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: #fff;
+  .app-preview__bubble {
+    max-width: 80%;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
   }
 
-  .chat-ui__bubble {
-    max-width: 82%;
-    padding: 0.55rem 0.7rem;
-    font-size: 0.78rem;
-    line-height: 1.35;
-  }
-
-  .chat-ui__bubble--in {
-    border-radius: 1rem 1rem 1rem 0.3rem;
+  .app-preview__bubble--in {
+    border-radius: 1.1rem 1.1rem 1.1rem 0.35rem;
     background: #fff;
     color: #111418;
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
   }
 
-  .chat-ui__bubble--out {
+  .app-preview__bubble--out {
     align-self: flex-end;
-    border-radius: 1rem 1rem 0.3rem 1rem;
+    border-radius: 1.1rem 1.1rem 0.35rem 1.1rem;
     background: #009c9c;
     color: #fff;
-    box-shadow: 0 8px 18px rgb(0 100 100 / 0.22);
+    box-shadow: 0 10px 24px rgb(0 100 100 / 0.2);
   }
 
-  .chat-ui__composer {
-    margin-top: auto;
+  .app-preview__composer {
+    margin: 0.65rem 1rem 1rem;
     border: 1px solid #d7ecec;
     border-radius: 1rem;
     background: #fff;
-    padding: 0.55rem 0.75rem;
-    font-size: 0.72rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
     color: #6b7280;
+  }
+
+  .app-preview__float {
+    position: absolute;
+    right: -0.75rem;
+    top: 18%;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+  }
+
+  @media (min-width: 640px) {
+    .app-preview__float {
+      display: flex;
+    }
   }
 </style>
