@@ -11,4 +11,9 @@
   body {
     @apply bg-surface text-ink font-sans;
   }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: var(--color-on-brand);
+  }
 }
