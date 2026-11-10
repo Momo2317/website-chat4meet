@@ -1,0 +1,11 @@
+:root {
+  --color-brand: #009c9c;
+  --color-brand-deep: #007a7a;
+  --color-ink: #111418;
+  --color-ink-muted: #6b7280;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f9fafb;
+  --color-border: #e5e7eb;
+  --color-on-brand: #ffffff;
+  --color-on-brand-muted: rgba(255, 255, 255, 0.8);
+}

@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+
+# env
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# logs
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# impeccable local overrides
+.impeccable/config.local.json
