@@ -190,14 +190,9 @@
   animation: rise-in 900ms var(--ease-out) both;
 }
 
-.scroll-cue {
-  animation: pulse-line 1.8s var(--ease-out) infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .ambient-orb,
-  .hero-rise,
-  .scroll-cue {
+  .hero-rise {
     animation: none !important;
   }
 

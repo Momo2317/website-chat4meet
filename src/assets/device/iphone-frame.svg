@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="body" x1="40" y1="20" x2="350" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C2C5CB"/>
+      <stop offset="0.28" stop-color="#8A8E96"/>
+      <stop offset="0.58" stop-color="#4A4E55"/>
+      <stop offset="1" stop-color="#1E2024"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="390" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8EAEE"/>
+      <stop offset="0.45" stop-color="#6A6E76"/>
+      <stop offset="1" stop-color="#B0B4BB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer phone body with transparent screen hole -->
+  <path
+    fill="url(#body)"
+    fill-rule="evenodd"
+    d="M68 0C30.431 0 0 30.431 0 68v708c0 37.569 30.431 68 68 68h254c37.569 0 68-30.431 68-68V68c0-37.569-30.431-68-68-68H68Zm19 22c-24.853 0-45 20.147-45 45v688c0 24.853 20.147 45 45 45h216c24.853 0 45-20.147 45-45V67c0-24.853-20.147-45-45-45H87Z"
+  />
+  <path
+    fill="none"
+    stroke="url(#edge)"
+    stroke-width="3"
+    d="M68 1.5h254c36.727 0 66.5 29.773 66.5 66.5v708c0 36.727-29.773 66.5-66.5 66.5H68c-36.727 0-66.5-29.773-66.5-66.5V68C1.5 31.273 31.273 1.5 68 1.5Z"
+  />
+
+  <!-- Inner dark lip around screen -->
+  <path
+    fill="#0B0B0C"
+    fill-rule="evenodd"
+    d="M87 18c-27.062 0-49 21.938-49 49v688c0 27.062 21.938 49 49 49h216c27.062 0 49-21.938 49-49V67c0-27.062-21.938-49-49-49H87Zm8 10c-18.778 0-34 15.222-34 34v668c0 18.778 15.222 34 34 34h200c18.778 0 34-15.222 34-34V62c0-18.778-15.222-34-34-34H95Z"
+  />
+
+  <!-- Dynamic Island -->
+  <rect x="126" y="32" width="138" height="34" rx="17" fill="#050505"/>
+  <circle cx="236" cy="49" r="5" fill="#152033"/>
+  <circle cx="236" cy="49" r="2.2" fill="#3F82AB"/>
+
+  <!-- Hardware buttons -->
+  <rect x="0" y="164" width="4" height="28" rx="1.5" fill="#7A7E86"/>
+  <rect x="0" y="220" width="4" height="56" rx="1.5" fill="#7A7E86"/>
+  <rect x="0" y="288" width="4" height="56" rx="1.5" fill="#7A7E86"/>
+  <rect x="386" y="240" width="4" height="88" rx="1.5" fill="#7A7E86"/>
+</svg>

@@ -7,11 +7,12 @@ import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
 import alex from "../assets/photos/person-alex.jpg";
 import maya from "../assets/photos/person-maya.jpg";
 import jules from "../assets/photos/person-jules.jpg";
+import sceneStories from "../assets/photos/scene-stories.jpg";
 ---
 
 <section
   id="top"
-  class="relative overflow-hidden bg-brand pb-20 pt-28 text-white md:pb-28 md:pt-32"
+  class="relative overflow-hidden bg-brand pb-16 pt-28 text-white md:pb-24 md:pt-32"
   aria-labelledby="hero-heading"
 >
   <div class="ambient-orb -left-16 top-24 h-64 w-64 bg-white/30"></div>
@@ -20,13 +21,8 @@ import jules from "../assets/photos/person-jules.jpg";
     style="animation-delay: -4s"
   >
   </div>
-  <div
-    class="ambient-orb bottom-10 left-1/3 h-52 w-52 bg-brand-deep/60"
-    style="animation-delay: -8s"
-  >
-  </div>
 
-  <div class="site-shell relative grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+  <div class="site-shell relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
     <div class="hero-rise text-center lg:text-left">
       <Image
         src={wordmark}
@@ -57,68 +53,117 @@ import jules from "../assets/photos/person-jules.jpg";
       <p class="mt-6 text-sm text-white/70">{site.tagline}</p>
     </div>
 
-    <div class="relative mx-auto flex justify-center" style="animation-delay: 120ms">
+    <div class="relative mx-auto w-full max-w-[320px]">
       <IphoneMockup>
-        <div class="flex h-full flex-col bg-[#f4fbfb]">
-          <div class="flex items-center gap-3 bg-brand px-4 pb-4 pt-12 text-white">
-            <Image src={mark} alt="" width={36} height={36} class="h-9 w-9 rounded-xl" />
-            <div class="text-left">
-              <p class="text-sm font-semibold leading-none">{site.name}</p>
-              <p class="mt-1 text-xs text-white/75">Online · close friends</p>
+        <div class="phone-ui">
+          <Image
+            src={sceneStories}
+            alt="Friends sharing a moment in Chat4Meet"
+            width={720}
+            height={1280}
+            class="phone-ui__photo"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="phone-ui__shade" aria-hidden="true"></div>
+          <div class="phone-ui__chrome">
+            <div class="phone-ui__top">
+              <Image src={mark} alt="" width={28} height={28} class="h-7 w-7 rounded-lg" />
+              <div>
+                <p class="text-[13px] font-semibold leading-none text-white">{site.name}</p>
+                <p class="mt-1 text-[11px] text-white/75">Stories · live</p>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-1 flex-col gap-3 p-4">
-            <div class="flex gap-3 overflow-hidden pb-1">
+            <div class="phone-ui__avatars">
               {
                 [
                   { img: alex, name: "Alex" },
                   { img: maya, name: "Maya" },
                   { img: jules, name: "Jules" },
                 ].map((person) => (
-                  <figure class="flex w-14 shrink-0 flex-col items-center gap-1">
-                    <span class="story-ring block">
+                  <figure class="flex flex-col items-center gap-1">
+                    <span class="story-ring block scale-90">
                       <Image
                         src={person.img}
                         alt=""
-                        width={52}
-                        height={52}
-                        class="h-[52px] w-[52px] object-cover"
+                        width={44}
+                        height={44}
+                        class="h-11 w-11 object-cover"
                       />
                     </span>
-                    <figcaption class="text-[10px] text-ink-muted">{person.name}</figcaption>
+                    <figcaption class="text-[10px] text-white/85">{person.name}</figcaption>
                   </figure>
                 ))
               }
             </div>
-            <div class="ml-auto max-w-[78%] rounded-2xl rounded-br-md bg-brand px-3.5 py-2.5 text-left text-sm leading-snug text-white shadow-soft">
+            <div class="phone-ui__bubble">
               Let’s meet after work — same café as last time?
-            </div>
-            <div class="flex items-end gap-2">
-              <Image
-                src={maya}
-                alt=""
-                width={28}
-                height={28}
-                class="h-7 w-7 rounded-full object-cover"
-              />
-              <div class="max-w-[78%] rounded-2xl rounded-bl-md bg-white px-3.5 py-2.5 text-left text-sm leading-snug text-ink shadow-sm">
-                Perfect. I’ll send a story when I’m nearby.
-              </div>
-            </div>
-            <div class="mt-auto rounded-2xl border border-surface-border bg-white px-3 py-2.5 text-left text-xs text-ink-muted">
-              Message…
             </div>
           </div>
         </div>
       </IphoneMockup>
     </div>
   </div>
-
-  <a
-    href="#journey"
-    class="scroll-cue mx-auto mt-14 flex h-10 w-6 flex-col items-center justify-end rounded-full border border-white/40 pb-1.5"
-    aria-label="Scroll to the product tour"
-  >
-    <span class="block h-2 w-0.5 rounded-full bg-white"></span>
-  </a>
 </section>
+
+<style>
+  .phone-ui {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .phone-ui__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .phone-ui__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 70, 70, 0.55) 0%,
+      rgba(0, 40, 40, 0.15) 35%,
+      rgba(0, 20, 20, 0.2) 60%,
+      rgba(0, 30, 30, 0.75) 100%
+    );
+  }
+
+  .phone-ui__chrome {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 3.2rem 0.9rem 1.1rem;
+  }
+
+  .phone-ui__top {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .phone-ui__avatars {
+    display: flex;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+  }
+
+  .phone-ui__bubble {
+    margin-top: auto;
+    align-self: flex-end;
+    max-width: 85%;
+    border-radius: 1.1rem 1.1rem 0.35rem 1.1rem;
+    background: #009c9c;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  }
+</style>
