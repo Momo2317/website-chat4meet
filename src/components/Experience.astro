@@ -1,32 +1,23 @@
 ---
 import { Image } from "astro:assets";
 import { journeySteps } from "../config/site";
-import alex from "../assets/photos/person-alex.jpg";
-import maya from "../assets/photos/person-maya.jpg";
-import jules from "../assets/photos/person-jules.jpg";
-import sam from "../assets/photos/person-sam.jpg";
-import sceneChat from "../assets/photos/scene-chat.jpg";
-import sceneStories from "../assets/photos/scene-stories.jpg";
-import sceneProfiles from "../assets/photos/scene-profiles.jpg";
+import { photos } from "../config/photos";
 
 const panels = [
   {
     ...journeySteps[0],
-    image: sceneChat,
+    image: photos.experienceChat,
     imageAlt: "Couple meeting and talking in a café",
-    people: [sam, jules],
   },
   {
     ...journeySteps[1],
-    image: sceneStories,
+    image: photos.experienceStories,
     imageAlt: "Friends laughing together outdoors",
-    people: [maya, alex, jules],
   },
   {
     ...journeySteps[2],
-    image: sceneProfiles,
+    image: photos.experienceProfiles,
     imageAlt: "Two friends sitting together outdoors",
-    people: [maya, sam, alex],
   },
 ] as const;
 ---
@@ -90,19 +81,6 @@ const panels = [
                     class="absolute inset-0 h-full w-full object-cover"
                     loading={index === 0 ? "eager" : "lazy"}
                   />
-                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-5">
-                    <div class="flex -space-x-2">
-                      {panel.people.map((person) => (
-                        <Image
-                          src={person}
-                          alt=""
-                          width={44}
-                          height={44}
-                          class="h-11 w-11 rounded-full border-2 border-white object-cover"
-                        />
-                      ))}
-                    </div>
-                  </div>
                 </div>
                 <div class="flex flex-col justify-center p-8 md:p-10">
                   <h3 class="text-2xl font-bold tracking-tight text-ink md:text-3xl">

@@ -4,18 +4,21 @@ import frame from "../assets/device/phone-mockup-frame.png";
 ---
 
 <figure class="phone-mock hero-rise">
-  <div class="phone-mock__well">
-    <slot />
+  <div class="phone-mock__shadow" aria-hidden="true"></div>
+  <div class="phone-mock__device">
+    <div class="phone-mock__well">
+      <slot />
+    </div>
+    <Image
+      class="phone-mock__frame"
+      src={frame}
+      alt=""
+      width={1000}
+      height={2136}
+      loading="eager"
+      decoding="async"
+    />
   </div>
-  <Image
-    class="phone-mock__frame"
-    src={frame}
-    alt=""
-    width={1000}
-    height={2136}
-    loading="eager"
-    decoding="async"
-  />
 </figure>
 
 <style>
@@ -23,17 +26,45 @@ import frame from "../assets/device/phone-mockup-frame.png";
     position: relative;
     width: min(100%, 300px);
     margin: 0 auto;
+  }
+
+  .phone-mock__shadow {
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    bottom: -2%;
+    height: 10%;
+    border-radius: 50%;
+    background: rgb(20 10 40 / 0.35);
+    filter: blur(18px);
+    z-index: 0;
+  }
+
+  .phone-mock__device {
+    position: relative;
+    z-index: 1;
     aspect-ratio: 1000 / 2136;
-    filter: drop-shadow(0 24px 42px rgba(40, 20, 70, 0.28));
   }
 
   .phone-mock__well {
     position: absolute;
-    /* Measured transparent screen hole in phone-mockup-frame.png */
-    inset: 7.8% 6.5% 9.3% 7.4%;
+    /* Slightly inset into the bezel so the photo never leaves a dark gap */
+    inset: 7.2% 6.2% 8.7% 6.9%;
     overflow: hidden;
-    border-radius: 28px;
-    background: #111;
+    border-radius: 22px;
+    background: #0b0b0c;
+    z-index: 0;
+  }
+
+  .phone-mock__well :global(picture),
+  .phone-mock__well :global(img) {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center top !important;
   }
 
   .phone-mock__frame {
@@ -44,9 +75,6 @@ import frame from "../assets/device/phone-mockup-frame.png";
     object-fit: contain;
     pointer-events: none;
     user-select: none;
-  }
-
-  .phone-mock__well :global(img) {
-    max-width: none;
+    z-index: 2;
   }
 </style>
