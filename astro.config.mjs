@@ -6,4 +6,9 @@ export default defineConfig({
   base: "/website-chat4meet",
   output: "static",
   integrations: [tailwind()],
+  vite: {
+    server: {
+      open: "/website-chat4meet/",
+    },
+  },
 });

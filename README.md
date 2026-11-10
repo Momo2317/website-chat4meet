@@ -10,7 +10,7 @@ npm install
 npm run dev
 ```
 
-Öffne die angezeigte lokale URL (standardmäßig Port 4323). Mit `base: /website-chat4meet` in `astro.config.mjs` nutzt die Vorschau denselben Pfad wie GitHub Pages.
+Öffne die URL **mit Base-Pfad**, z. B. `http://localhost:4321/website-chat4meet/` (nicht nur `/`, sonst können Public-Assets fehlen). `npm run dev` öffnet diesen Pfad per Vite-Konfiguration.
 
 ```bash
 npm run build    # Ausgabe in dist/
