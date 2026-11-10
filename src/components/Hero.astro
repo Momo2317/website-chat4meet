@@ -1,10 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import { site } from "../config/site";
-import { photos } from "../config/photos";
 import IphoneMockup from "./IphoneMockup.astro";
 import wordmark from "../assets/brand/chat4meet_white_logo.png";
 import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
+
+const storyPeople = [
+  { initial: "A", name: "Alex", tone: "#0d9488" },
+  { initial: "M", name: "Maya", tone: "#0891b2" },
+  { initial: "J", name: "Jules", tone: "#059669" },
+] as const;
 ---
 
 <section
@@ -52,28 +57,53 @@ import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
 
     <div class="relative mx-auto w-full max-w-[300px]">
       <IphoneMockup>
-        <div class="phone-ui">
-          <Image
-            src={photos.heroPhone}
-            alt="Happy couple using Chat4Meet"
-            widths={[480, 720, 1000]}
-            sizes="300px"
-            class="phone-ui__photo"
-            loading="eager"
-            decoding="async"
-          />
-          <div class="phone-ui__shade" aria-hidden="true"></div>
-          <div class="phone-ui__chrome">
-            <div class="phone-ui__top">
-              <Image src={mark} alt="" width={28} height={28} class="h-7 w-7 rounded-lg" />
-              <div>
-                <p class="text-[13px] font-semibold leading-none text-white">{site.name}</p>
-                <p class="mt-1 text-[11px] text-white/75">Stories · live</p>
+        <div class="chat-ui">
+          <header class="chat-ui__header">
+            <Image src={mark} alt="" width={32} height={32} class="h-8 w-8 rounded-xl" />
+            <div>
+              <p class="text-[13px] font-semibold leading-none text-white">{site.name}</p>
+              <p class="mt-1 text-[11px] text-white/75">Online · close friends</p>
+            </div>
+          </header>
+
+          <div class="chat-ui__body">
+            <div class="chat-ui__stories" aria-hidden="true">
+              {
+                storyPeople.map((person) => (
+                  <figure class="flex w-12 flex-col items-center gap-1">
+                    <span class="story-ring block">
+                      <span
+                        class="flex h-11 w-11 items-center justify-center rounded-full text-sm font-semibold text-white"
+                        style={`background:${person.tone}`}
+                      >
+                        {person.initial}
+                      </span>
+                    </span>
+                    <figcaption class="text-[10px] text-ink-muted">{person.name}</figcaption>
+                  </figure>
+                ))
+              }
+            </div>
+
+            <div class="chat-ui__thread">
+              <div class="chat-ui__row">
+                <span class="chat-ui__avatar" style="background:#0d9488">M</span>
+                <div class="chat-ui__bubble chat-ui__bubble--in">
+                  Are you free after 7?
+                </div>
+              </div>
+              <div class="chat-ui__bubble chat-ui__bubble--out">
+                Yes — same café as last time?
+              </div>
+              <div class="chat-ui__row">
+                <span class="chat-ui__avatar" style="background:#0d9488">M</span>
+                <div class="chat-ui__bubble chat-ui__bubble--in">
+                  Perfect. I’ll send a story when I’m nearby.
+                </div>
               </div>
             </div>
-            <div class="phone-ui__bubble">
-              Let’s meet after work — same café as last time?
-            </div>
+
+            <div class="chat-ui__composer">Message…</div>
           </div>
         </div>
       </IphoneMockup>
@@ -82,58 +112,93 @@ import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
 </section>
 
 <style>
-  .phone-ui {
-    position: absolute;
-    inset: 0;
-  }
-
-  .phone-ui__photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  .phone-ui__shade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgb(0 40 40 / 0.28) 0%,
-      transparent 28%,
-      transparent 62%,
-      rgb(0 25 25 / 0.55) 100%
-    );
-    pointer-events: none;
-  }
-
-  .phone-ui__chrome {
-    position: absolute;
-    inset: 0;
+  .chat-ui {
     display: flex;
+    height: 100%;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 2.1rem 0.85rem 1rem;
-    pointer-events: none;
+    background: #f4fbfb;
   }
 
-  .phone-ui__top {
+  .chat-ui__header {
     display: flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.65rem;
+    background: #009c9c;
+    padding: 2rem 0.85rem 0.85rem;
   }
 
-  .phone-ui__bubble {
-    align-self: flex-end;
-    max-width: 85%;
-    border-radius: 1.1rem 1.1rem 0.35rem 1.1rem;
-    background: #009c9c;
-    padding: 0.7rem 0.85rem;
-    font-size: 0.8rem;
-    line-height: 1.35;
+  .chat-ui__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem 0.7rem 0.7rem;
+    min-height: 0;
+  }
+
+  .chat-ui__stories {
+    display: flex;
+    gap: 0.55rem;
+    overflow: hidden;
+  }
+
+  .chat-ui__thread {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.55rem;
+    justify-content: flex-end;
+    min-height: 0;
+  }
+
+  .chat-ui__row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.4rem;
+  }
+
+  .chat-ui__avatar {
+    display: inline-flex;
+    height: 1.55rem;
+    width: 1.55rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 600;
     color: #fff;
-    box-shadow: 0 10px 24px rgb(0 0 0 / 0.25);
+  }
+
+  .chat-ui__bubble {
+    max-width: 82%;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .chat-ui__bubble--in {
+    border-radius: 1rem 1rem 1rem 0.3rem;
+    background: #fff;
+    color: #111418;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+  }
+
+  .chat-ui__bubble--out {
+    align-self: flex-end;
+    border-radius: 1rem 1rem 0.3rem 1rem;
+    background: #009c9c;
+    color: #fff;
+    box-shadow: 0 8px 18px rgb(0 100 100 / 0.22);
+  }
+
+  .chat-ui__composer {
+    margin-top: auto;
+    border: 1px solid #d7ecec;
+    border-radius: 1rem;
+    background: #fff;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.72rem;
+    color: #6b7280;
   }
 </style>

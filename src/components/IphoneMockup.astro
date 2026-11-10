@@ -48,23 +48,11 @@ import frame from "../assets/device/phone-mockup-frame.png";
 
   .phone-mock__well {
     position: absolute;
-    /* Slightly inset into the bezel so the photo never leaves a dark gap */
     inset: 7.2% 6.2% 8.7% 6.9%;
     overflow: hidden;
     border-radius: 22px;
-    background: #0b0b0c;
+    background: #f4fbfb;
     z-index: 0;
-  }
-
-  .phone-mock__well :global(picture),
-  .phone-mock__well :global(img) {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    object-fit: cover !important;
-    object-position: center top !important;
   }
 
   .phone-mock__frame {
