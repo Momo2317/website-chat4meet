@@ -65,3 +65,70 @@ const onScroll = () => {
 
 onScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
+
+function initStoryCarousel(root: HTMLElement) {
+  const track = root.querySelector<HTMLElement>("[data-story-track]");
+  const tabs = Array.from(root.querySelectorAll<HTMLElement>("[data-story-tab]"));
+  const status = root.querySelector<HTMLElement>("[data-story-status]");
+  const prev = root.querySelector<HTMLButtonElement>("[data-story-prev]");
+  const next = root.querySelector<HTMLButtonElement>("[data-story-next]");
+  if (!track || tabs.length === 0) return;
+
+  const total = tabs.length;
+  let index = 0;
+  let pointerStartX = 0;
+  let dragging = false;
+
+  const goTo = (nextIndex: number) => {
+    index = (nextIndex + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    for (const tab of tabs) {
+      const active = Number(tab.dataset.storyTab) === index;
+      tab.setAttribute("aria-selected", active ? "true" : "false");
+    }
+    if (status) status.textContent = `${index + 1} / ${total}`;
+  };
+
+  for (const tab of tabs) {
+    tab.addEventListener("click", () => goTo(Number(tab.dataset.storyTab)));
+  }
+  prev?.addEventListener("click", () => goTo(index - 1));
+  next?.addEventListener("click", () => goTo(index + 1));
+
+  root.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo(index - 1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      goTo(index + 1);
+    }
+  });
+
+  const onPointerDown = (event: PointerEvent) => {
+    dragging = true;
+    pointerStartX = event.clientX;
+    root.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerUp = (event: PointerEvent) => {
+    if (!dragging) return;
+    dragging = false;
+    const delta = event.clientX - pointerStartX;
+    if (Math.abs(delta) < 40) return;
+    goTo(delta < 0 ? index + 1 : index - 1);
+  };
+
+  root.addEventListener("pointerdown", onPointerDown);
+  root.addEventListener("pointerup", onPointerUp);
+  root.addEventListener("pointercancel", () => {
+    dragging = false;
+  });
+
+  goTo(0);
+}
+
+for (const carousel of document.querySelectorAll<HTMLElement>("[data-story-carousel]")) {
+  initStoryCarousel(carousel);
+}

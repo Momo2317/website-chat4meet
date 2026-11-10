@@ -69,8 +69,8 @@ import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
           <div class="flex flex-1 flex-col gap-3 bg-[#f4fbfb] p-4">
             <div class="flex gap-3 overflow-hidden pb-1">
               {
-                [story1, story2, story3].map((img, i) => (
-                  <div class="story-ring shrink-0" style={`animation-delay: ${i * -2}s`}>
+                [story1, story2, story3].map((img) => (
+                  <div class="story-ring shrink-0">
                     <Image src={img} alt="" width={52} height={52} class="h-[52px] w-[52px] object-cover" />
                   </div>
                 ))

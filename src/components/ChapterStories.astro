@@ -25,32 +25,90 @@ const rings = [
   <div class="ambient-orb -right-10 top-16 h-72 w-72 bg-white/20"></div>
   <div class="site-shell relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
     <div class="reveal">
-      <div class="mb-8 flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {
-          rings.map((ring, i) => (
-            <figure class="flex w-[72px] shrink-0 flex-col items-center gap-2">
-              <div class="story-ring" style={`animation-delay: ${i * -1.5}s`}>
-                <Image
-                  src={ring.img}
-                  alt=""
-                  width={66}
-                  height={66}
-                  class="h-[66px] w-[66px] object-cover"
-                />
-              </div>
-              <figcaption class="text-xs text-white/80">{ring.name}</figcaption>
-            </figure>
-          ))
-        }
-      </div>
-      <div class="overflow-hidden rounded-[1.5rem] border border-white/20 shadow-lift">
-        <Image
-          src={story2}
-          alt="A Chat4Meet story moment"
-          width={720}
-          height={900}
-          class="aspect-[4/5] w-full object-cover"
-        />
+      <div
+        class="story-carousel"
+        data-story-carousel
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Chat4Meet stories"
+      >
+        <div
+          class="mb-6 flex gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          role="tablist"
+          aria-label="Story people"
+        >
+          {
+            rings.map((ring, i) => (
+              <button
+                type="button"
+                role="tab"
+                class="story-ring-btn flex w-[72px] shrink-0 flex-col items-center gap-2"
+                data-story-tab={i}
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-controls={`story-slide-${i}`}
+                id={`story-tab-${i}`}
+              >
+                <span class="story-ring block">
+                  <Image
+                    src={ring.img}
+                    alt=""
+                    width={66}
+                    height={66}
+                    class="h-[66px] w-[66px] object-cover"
+                  />
+                </span>
+                <span class="text-xs text-white/80">{ring.name}</span>
+              </button>
+            ))
+          }
+        </div>
+
+        <div class="overflow-hidden rounded-[1.5rem] border border-white/20 shadow-lift">
+          <div class="story-track" data-story-track>
+            {
+              rings.map((ring, i) => (
+                <div
+                  class="story-slide"
+                  id={`story-slide-${i}`}
+                  role="tabpanel"
+                  aria-labelledby={`story-tab-${i}`}
+                  data-story-slide={i}
+                >
+                  <Image
+                    src={ring.img}
+                    alt={`${ring.name}'s Chat4Meet story`}
+                    width={720}
+                    height={900}
+                    class="aspect-[4/5] w-full object-cover"
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mt-5 flex items-center justify-between gap-3">
+          <button
+            type="button"
+            class="rounded-full border border-white/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+            data-story-prev
+            aria-label="Previous story"
+          >
+            ← Prev
+          </button>
+          <p class="text-sm text-white/75" data-story-status aria-live="polite">
+            1 / {rings.length}
+          </p>
+          <button
+            type="button"
+            class="rounded-full border border-white/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+            data-story-next
+            aria-label="Next story"
+          >
+            Next →
+          </button>
+        </div>
       </div>
     </div>
 
