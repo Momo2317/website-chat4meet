@@ -1,16 +1,29 @@
 ---
-import { site } from "../config/site";
+import { trustPoints } from "../config/site";
+
+const delays = ["", "reveal-delay-1", "reveal-delay-2"] as const;
 ---
 
-<section class="border-y border-surface-border bg-surface-soft px-6 py-16" aria-labelledby="trust-heading">
-  <div class="mx-auto max-w-2xl text-center">
-    <h2 id="trust-heading" class="text-xl font-semibold text-ink">
-      Sicher und direkt
-    </h2>
-    <p class="mt-4 text-[17px] leading-relaxed text-ink-muted">
-      {site.tagline} Chat4Meet ist darauf ausgelegt, echte Gespräche und geteilte Momente ohne
-      unnötigen Ballast zu ermöglichen — klar, vertraut und nah an dem, was du aus der App
-      kennst.
-    </p>
+<section id="trust" class="scroll-mt-24 border-y border-surface-border bg-surface py-20 md:py-24" aria-labelledby="trust-heading">
+  <div class="site-shell">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <h2 id="trust-heading" class="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+        Built for closeness, not noise
+      </h2>
+      <p class="mt-4 text-[17px] leading-relaxed text-ink-muted">
+        Chat4Meet stays focused on real connections — safe, direct, and recognizable from the first teal screen.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-8 md:grid-cols-3">
+      {
+        trustPoints.map((item, i) => (
+          <article class:list={["reveal", "border-t-2", "border-brand", "pt-6", delays[i]]}>
+            <h3 class="text-lg font-semibold text-ink">{item.title}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-muted">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>

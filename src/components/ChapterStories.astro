@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import { journeySteps } from "../config/site";
+import story1 from "../assets/brand/stories/story_1.png";
+import story2 from "../assets/brand/stories/story_2.png";
+import story3 from "../assets/brand/stories/story_3.png";
+import story4 from "../assets/brand/stories/story_4.png";
+import story5 from "../assets/brand/stories/story_5.png";
+
+const step = journeySteps[1];
+const rings = [
+  { img: story1, name: "Alex" },
+  { img: story2, name: "Maya" },
+  { img: story3, name: "Jules" },
+  { img: story4, name: "Sam" },
+  { img: story5, name: "Riley" },
+];
+---
+
+<section
+  id={step.id}
+  class="scroll-mt-24 overflow-hidden bg-brand py-20 text-white md:py-28"
+  aria-labelledby="stories-heading"
+>
+  <div class="ambient-orb -right-10 top-16 h-72 w-72 bg-white/20"></div>
+  <div class="site-shell relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <div class="reveal">
+      <div class="mb-8 flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {
+          rings.map((ring, i) => (
+            <figure class="flex w-[72px] shrink-0 flex-col items-center gap-2">
+              <div class="story-ring" style={`animation-delay: ${i * -1.5}s`}>
+                <Image
+                  src={ring.img}
+                  alt=""
+                  width={66}
+                  height={66}
+                  class="h-[66px] w-[66px] object-cover"
+                />
+              </div>
+              <figcaption class="text-xs text-white/80">{ring.name}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <div class="overflow-hidden rounded-[1.5rem] border border-white/20 shadow-lift">
+        <Image
+          src={story2}
+          alt="A Chat4Meet story moment"
+          width={720}
+          height={900}
+          class="aspect-[4/5] w-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <h2 id="stories-heading" class="text-3xl font-bold tracking-tight md:text-4xl">
+        {step.label}: {step.title}
+      </h2>
+      <p class="mt-4 max-w-prose text-[17px] leading-relaxed text-white/80">
+        {step.description}
+      </p>
+      <ul class="mt-8 space-y-3">
+        {
+          step.points.map((point) => (
+            <li class="flex gap-3 text-[15px] text-white">
+              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-white" aria-hidden="true" />
+              <span>{point}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="#profiles"
+        class="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:gap-3"
+      >
+        Next: Profiles
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>

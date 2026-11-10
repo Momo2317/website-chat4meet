@@ -7,6 +7,7 @@ export default {
         brand: {
           DEFAULT: "#009C9C",
           deep: "#007A7A",
+          soft: "#E6F7F7",
         },
         ink: {
           DEFAULT: "#111418",
@@ -14,12 +15,16 @@ export default {
         },
         surface: {
           DEFAULT: "#FFFFFF",
-          soft: "#F9FAFB",
-          border: "#E5E7EB",
+          soft: "#F4FBFB",
+          border: "#D7ECEC",
         },
       },
       fontFamily: {
         sans: ["Ubuntu", "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        soft: "0 18px 50px rgba(0, 90, 90, 0.18)",
+        lift: "0 28px 70px rgba(0, 70, 70, 0.22)",
       },
     },
   },

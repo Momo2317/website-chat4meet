@@ -18,13 +18,13 @@ Diese Website ist die **öffentliche Präsenz** der App: kurze Erklärung, CI wi
 
 ## Audience
 
-- Interessenten, die die App im App Store / Play Store finden wollen
+- People discovering Chat4Meet before download
 - Bestehende Nutzer, die die Marke wiedererkennen sollen
 - Situation: kurzer Besuch, mobil oder Desktop
 
 ## Positioning
 
-Tagline (DE, aus der App): **„Echte Verbindungen. Sicher und direkt.“**
+Tagline (EN, from app): **“Real connections. Safe and direct.”**
 
 Keine erfundenen Kunden, Bewertungen oder Feature-Versprechen über das App-Angebot hinaus.
 

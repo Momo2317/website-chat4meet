@@ -1,23 +1,25 @@
 ---
 name: Chat4Meet Website
-description: Clean App-CI marketing landing — turquoise hero, Ubuntu, white feature bands
+description: Guided English marketing landing — teal immersion, story imagery, scroll tour
 colors:
   brand: "#009C9C"
   brand-deep: "#007A7A"
+  brand-soft: "#E6F7F7"
   ink: "#111418"
   ink-muted: "#6B7280"
   surface: "#FFFFFF"
-  surface-soft: "#F9FAFB"
-  border: "#E5E7EB"
+  surface-soft: "#F4FBFB"
+  border: "#D7ECEC"
   on-brand: "#FFFFFF"
-  on-brand-muted: "rgba(255, 255, 255, 0.8)"
+  phone-mid: "#045858"
+  phone-dark: "#033F3F"
 typography:
   display:
     fontFamily: "Ubuntu, system-ui, sans-serif"
-    fontSize: "1.875rem"
+    fontSize: "3rem"
     fontWeight: 700
-    lineHeight: 1.25
-    letterSpacing: "-0.01em"
+    lineHeight: 1.12
+    letterSpacing: "-0.02em"
   body:
     fontFamily: "Ubuntu, system-ui, sans-serif"
     fontSize: "1.0625rem"
@@ -31,19 +33,20 @@ typography:
     lineHeight: 1.35
     letterSpacing: "0em"
 rounded:
-  card: "1rem"
+  phone: "2.25rem"
+  panel: "1.75rem"
   pill: "9999px"
 spacing:
   section-y: "5rem"
-  card-pad: "2rem"
+  shell: "1.5rem"
 components:
-  button-primary:
+  cta-primary:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.on-brand}"
     rounded: "{rounded.pill}"
     padding: "0.75rem 2rem"
-  button-secondary:
-    backgroundColor: "transparent"
+  cta-on-brand:
+    backgroundColor: "{colors.on-brand}"
     textColor: "{colors.brand}"
     rounded: "{rounded.pill}"
     padding: "0.75rem 2rem"
@@ -51,44 +54,41 @@ components:
 
 ## Overview
 
-Einseitige **Persuade**-Landing: oben Vollfläche in App-Türkis (Splash-Handoff), darunter weiße und soft-graue Bänder für Features, Vertrauen und Download. Ubuntu durchgängig; keine Marketing-Gadgets.
+English **Persuade** landing with a guided scroll path: teal hero with phone preview → Chat → Stories → Profiles → trust → download. Brand assets and story photography from the Chat4Meet app. Ubuntu throughout.
 
 ## Colors
 
-| Rolle | Token | Verwendung |
-|-------|-------|------------|
-| Brand | `brand` | Hero-Hintergrund, Outline-Buttons |
-| Text | `ink` / `ink-muted` | Überschriften / Fließtext |
-| Flächen | `surface`, `surface-soft` | Sektionen, Karten |
-| Rand | `border` | Karten, Footer-Trenner |
-
-Auf Türkis: Text `on-brand` / `on-brand-muted` — nie neutrales Grau.
+Committed teal world: hero and Stories chapter are full brand fields; Chat/Profiles rest on soft mint whites. On teal, secondary text is white/80 — never gray.
 
 ## Typography
 
-Ubuntu von Google Fonts. Überschriften 700, Fließtext 400, Buttons/Labels 600. Max. Breite für längere Absätze ~42rem (Trust).
+Ubuntu 400–700. Hero display ~3–3.5rem. Section titles ~2–2.5rem. Body 17px where narrative matters.
 
 ## Layout
 
-Vertikaler Scroll; zentrierte Container `max-w-5xl` / `max-w-2xl`. Feature-Grid ab `sm`: 3 Spalten. Section-Padding `py-16`–`py-20`, horizontal `px-6`.
+`max-w-6xl` shell. Alternating two-column chapters (copy + visual). Sticky translucent header. Progress chips/dots between hero and chapters.
 
 ## Elevation & Depth
 
-Flach: 1px Borders statt Schatten. Keine Glows oder Glass.
+Soft teal-tinted shadows on phone and panels (`shadow-soft` / `shadow-lift`). Ambient blurred orbs for atmosphere, not glass cards.
 
 ## Shapes
 
-Karten `rounded-2xl`; CTAs `rounded-full` (Pill). Hero ohne zusätzliche Rahmen.
+Phone shell ~2.25rem; panels ~1.75rem; CTAs and story rings full pills.
 
 ## Components
 
-- **Hero:** Logo-Stack (Icon + Wordmark), Tagline
-- **Feature cards:** Border + soft fill
-- **Download:** Primary (filled ink) + secondary (brand outline), disabled state wenn keine Store-URLs
-- **Footer:** Muted small text
+- **Hero phone:** stylized chat + story rings (illustrative, not store screenshots)
+- **Journey guide:** dots + chips synced to scroll
+- **Story rings:** rotating conic gradient border
+- **Download:** dual store CTAs (disabled until URLs exist)
+
+## Motion
+
+Focal: hero rise-in. Continuity: scroll-linked guide active state + reveal blur→sharp. Ambient: slow orb drift, story-ring spin. All gated by `prefers-reduced-motion`.
 
 ## Do's and Don'ts
 
-**Do:** App-Farben und Tagline wörtlich übernehmen; semantische `<section>` mit `aria-labelledby`.
+**Do:** Lead visitors chapter by chapter; use real app story art; keep teal identity.
 
-**Don't:** Erfundene Testimonials, Stat-Hero, Eyebrow-Kicker über H1, Gradient-Text, Store-Links ohne echte URLs aktiv schalten.
+**Don't:** Fake testimonials; invent store ratings; eyebrow kickers above headings; identical icon-card grids as the page structure.
