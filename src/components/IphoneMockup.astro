@@ -1,17 +1,19 @@
 ---
-import frameUrl from "../assets/device/iphone-frame.svg?url";
+import { Image } from "astro:assets";
+import frame from "../assets/device/phone-mockup-frame.png";
 ---
 
 <figure class="phone-mock hero-rise">
   <div class="phone-mock__well">
     <slot />
   </div>
-  <img
+  <Image
     class="phone-mock__frame"
-    src={frameUrl}
+    src={frame}
     alt=""
-    width="390"
-    height="844"
+    width={1000}
+    height={2136}
+    loading="eager"
     decoding="async"
   />
 </figure>
@@ -21,16 +23,16 @@ import frameUrl from "../assets/device/iphone-frame.svg?url";
     position: relative;
     width: min(100%, 300px);
     margin: 0 auto;
-    aspect-ratio: 390 / 844;
-    filter: drop-shadow(0 24px 40px rgba(0, 35, 35, 0.32));
+    aspect-ratio: 1000 / 2136;
+    filter: drop-shadow(0 24px 42px rgba(40, 20, 70, 0.28));
   }
 
   .phone-mock__well {
     position: absolute;
-    /* Matches ~10px SVG bezel (27/390 ≈ 6.9%, 20/844 ≈ 2.4%) */
-    inset: 2.4% 6.9% 2.4%;
+    /* Measured transparent screen hole in phone-mockup-frame.png */
+    inset: 7.8% 6.5% 9.3% 7.4%;
     overflow: hidden;
-    border-radius: 34px;
+    border-radius: 28px;
     background: #111;
   }
 
@@ -39,6 +41,7 @@ import frameUrl from "../assets/device/iphone-frame.svg?url";
     inset: 0;
     width: 100%;
     height: 100%;
+    object-fit: contain;
     pointer-events: none;
     user-select: none;
   }
