@@ -45,4 +45,11 @@ Proprietär — Chat4Meet / MSquare.
 
 ## Photo credits
 
-Lifestyle photography from [Pexels](https://www.pexels.com/) (free to use).
+Lifestyle photography from [Pexels](https://www.pexels.com/) (free to use):
+
+- [9320841](https://www.pexels.com/photo/9320841/)
+- [8957072](https://www.pexels.com/photo/8957072/)
+- [5677481](https://www.pexels.com/photo/5677481/)
+- [13931531](https://www.pexels.com/photo/13931531/)
+- [8602629](https://www.pexels.com/photo/8602629/)
+- [16756653](https://www.pexels.com/photo/16756653/)
