@@ -1,11 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import { site } from "../config/site";
+import IphoneMockup from "./IphoneMockup.astro";
 import wordmark from "../assets/brand/chat4meet_white_logo.png";
-import story1 from "../assets/brand/stories/story_1.png";
-import story2 from "../assets/brand/stories/story_2.png";
-import story3 from "../assets/brand/stories/story_3.png";
 import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
+import alex from "../assets/photos/person-alex.jpg";
+import maya from "../assets/photos/person-maya.jpg";
+import jules from "../assets/photos/person-jules.jpg";
 ---
 
 <section
@@ -56,38 +57,60 @@ import mark from "../assets/brand/chat_logo_1024x1024_009c9c.png";
       <p class="mt-6 text-sm text-white/70">{site.tagline}</p>
     </div>
 
-    <div class="hero-rise relative mx-auto flex justify-center" style="animation-delay: 120ms">
-      <div class="phone-shell">
-        <div class="phone-screen flex flex-col">
-          <div class="flex items-center gap-3 bg-brand px-4 pb-4 pt-8 text-white">
+    <div class="relative mx-auto flex justify-center" style="animation-delay: 120ms">
+      <IphoneMockup>
+        <div class="flex h-full flex-col bg-[#f4fbfb]">
+          <div class="flex items-center gap-3 bg-brand px-4 pb-4 pt-12 text-white">
             <Image src={mark} alt="" width={36} height={36} class="h-9 w-9 rounded-xl" />
             <div class="text-left">
               <p class="text-sm font-semibold leading-none">{site.name}</p>
-              <p class="mt-1 text-xs text-white/75">Online · 3 close friends</p>
+              <p class="mt-1 text-xs text-white/75">Online · close friends</p>
             </div>
           </div>
-          <div class="flex flex-1 flex-col gap-3 bg-[#f4fbfb] p-4">
+          <div class="flex flex-1 flex-col gap-3 p-4">
             <div class="flex gap-3 overflow-hidden pb-1">
               {
-                [story1, story2, story3].map((img) => (
-                  <div class="story-ring shrink-0">
-                    <Image src={img} alt="" width={52} height={52} class="h-[52px] w-[52px] object-cover" />
-                  </div>
+                [
+                  { img: alex, name: "Alex" },
+                  { img: maya, name: "Maya" },
+                  { img: jules, name: "Jules" },
+                ].map((person) => (
+                  <figure class="flex w-14 shrink-0 flex-col items-center gap-1">
+                    <span class="story-ring block">
+                      <Image
+                        src={person.img}
+                        alt=""
+                        width={52}
+                        height={52}
+                        class="h-[52px] w-[52px] object-cover"
+                      />
+                    </span>
+                    <figcaption class="text-[10px] text-ink-muted">{person.name}</figcaption>
+                  </figure>
                 ))
               }
             </div>
             <div class="ml-auto max-w-[78%] rounded-2xl rounded-br-md bg-brand px-3.5 py-2.5 text-left text-sm leading-snug text-white shadow-soft">
               Let’s meet after work — same café as last time?
             </div>
-            <div class="max-w-[78%] rounded-2xl rounded-bl-md bg-white px-3.5 py-2.5 text-left text-sm leading-snug text-ink shadow-sm">
-              Perfect. I’ll send a story when I’m nearby.
+            <div class="flex items-end gap-2">
+              <Image
+                src={maya}
+                alt=""
+                width={28}
+                height={28}
+                class="h-7 w-7 rounded-full object-cover"
+              />
+              <div class="max-w-[78%] rounded-2xl rounded-bl-md bg-white px-3.5 py-2.5 text-left text-sm leading-snug text-ink shadow-sm">
+                Perfect. I’ll send a story when I’m nearby.
+              </div>
             </div>
             <div class="mt-auto rounded-2xl border border-surface-border bg-white px-3 py-2.5 text-left text-xs text-ink-muted">
               Message…
             </div>
           </div>
         </div>
-      </div>
+      </IphoneMockup>
     </div>
   </div>
 

@@ -3,24 +3,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 document.documentElement.classList.add("js-ready");
 
 const reveals = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-const sections = ["chat", "stories", "profiles", "trust", "download"]
-  .map((id) => document.getElementById(id))
-  .filter((el): el is HTMLElement => Boolean(el));
-const dots = Array.from(document.querySelectorAll<HTMLElement>("[data-guide-dot]"));
-const chips = Array.from(document.querySelectorAll<HTMLElement>("[data-guide-chip]"));
 const header = document.querySelector<HTMLElement>("[data-site-header]");
-
-function setActive(id: string | null) {
-  for (const dot of dots) {
-    dot.classList.toggle("is-active", dot.dataset.guideDot === id);
-  }
-  for (const chip of chips) {
-    const on = chip.dataset.guideChip === id;
-    chip.classList.toggle("border-brand", on);
-    chip.classList.toggle("text-brand", on);
-    chip.classList.toggle("bg-brand-soft", on);
-  }
-}
 
 if (!reduceMotion && "IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
@@ -36,24 +19,8 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   );
 
   for (const el of reveals) revealObserver.observe(el);
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible?.target.id) return;
-      if (["chat", "stories", "profiles"].includes(visible.target.id)) {
-        setActive(visible.target.id);
-      }
-    },
-    { threshold: [0.35, 0.55] },
-  );
-
-  for (const section of sections) sectionObserver.observe(section);
 } else {
   for (const el of reveals) el.classList.add("is-in");
-  setActive("chat");
 }
 
 const onScroll = () => {
@@ -66,12 +33,12 @@ const onScroll = () => {
 onScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
-function initStoryCarousel(root: HTMLElement) {
-  const track = root.querySelector<HTMLElement>("[data-story-track]");
-  const tabs = Array.from(root.querySelectorAll<HTMLElement>("[data-story-tab]"));
-  const status = root.querySelector<HTMLElement>("[data-story-status]");
-  const prev = root.querySelector<HTMLButtonElement>("[data-story-prev]");
-  const next = root.querySelector<HTMLButtonElement>("[data-story-next]");
+function initExperience(root: HTMLElement) {
+  const track = root.querySelector<HTMLElement>("[data-experience-track]");
+  const tabs = Array.from(root.querySelectorAll<HTMLElement>("[data-experience-tab]"));
+  const status = root.querySelector<HTMLElement>("[data-experience-status]");
+  const prev = root.querySelector<HTMLButtonElement>("[data-experience-prev]");
+  const next = root.querySelector<HTMLButtonElement>("[data-experience-next]");
   if (!track || tabs.length === 0) return;
 
   const total = tabs.length;
@@ -79,18 +46,26 @@ function initStoryCarousel(root: HTMLElement) {
   let pointerStartX = 0;
   let dragging = false;
 
-  const goTo = (nextIndex: number) => {
-    index = (nextIndex + total) % total;
-    track.style.transform = `translateX(-${index * 100}%)`;
+  const paintTabs = () => {
     for (const tab of tabs) {
-      const active = Number(tab.dataset.storyTab) === index;
+      const active = Number(tab.dataset.experienceTab) === index;
       tab.setAttribute("aria-selected", active ? "true" : "false");
+      tab.classList.toggle("bg-brand", active);
+      tab.classList.toggle("text-white", active);
+      tab.classList.toggle("text-ink", !active);
+      tab.classList.toggle("hover:bg-brand-soft", !active);
     }
     if (status) status.textContent = `${index + 1} / ${total}`;
   };
 
+  const goTo = (nextIndex: number) => {
+    index = (nextIndex + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    paintTabs();
+  };
+
   for (const tab of tabs) {
-    tab.addEventListener("click", () => goTo(Number(tab.dataset.storyTab)));
+    tab.addEventListener("click", () => goTo(Number(tab.dataset.experienceTab)));
   }
   prev?.addEventListener("click", () => goTo(index - 1));
   next?.addEventListener("click", () => goTo(index + 1));
@@ -106,29 +81,28 @@ function initStoryCarousel(root: HTMLElement) {
     }
   });
 
-  const onPointerDown = (event: PointerEvent) => {
-    dragging = true;
-    pointerStartX = event.clientX;
-    root.setPointerCapture(event.pointerId);
-  };
-
-  const onPointerUp = (event: PointerEvent) => {
-    if (!dragging) return;
-    dragging = false;
-    const delta = event.clientX - pointerStartX;
-    if (Math.abs(delta) < 40) return;
-    goTo(delta < 0 ? index + 1 : index - 1);
-  };
-
-  root.addEventListener("pointerdown", onPointerDown);
-  root.addEventListener("pointerup", onPointerUp);
-  root.addEventListener("pointercancel", () => {
-    dragging = false;
-  });
+  const stage = track.parentElement;
+  if (stage) {
+    stage.addEventListener("pointerdown", (event: PointerEvent) => {
+      dragging = true;
+      pointerStartX = event.clientX;
+      stage.setPointerCapture(event.pointerId);
+    });
+    stage.addEventListener("pointerup", (event: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      const delta = event.clientX - pointerStartX;
+      if (Math.abs(delta) < 48) return;
+      goTo(delta < 0 ? index + 1 : index - 1);
+    });
+    stage.addEventListener("pointercancel", () => {
+      dragging = false;
+    });
+  }
 
   goTo(0);
 }
 
-for (const carousel of document.querySelectorAll<HTMLElement>("[data-story-carousel]")) {
-  initStoryCarousel(carousel);
+for (const experience of document.querySelectorAll<HTMLElement>("[data-experience]")) {
+  initExperience(experience);
 }

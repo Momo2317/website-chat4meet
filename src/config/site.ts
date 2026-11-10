@@ -15,7 +15,7 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { label: "Experience", href: "#journey" },
+  { label: "Tour", href: "#journey" },
   { label: "Why Chat4Meet", href: "#trust" },
   { label: "Get the app", href: "#download" },
 ] as const;

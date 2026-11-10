@@ -1,0 +1,150 @@
+---
+import { Image } from "astro:assets";
+import { journeySteps } from "../config/site";
+import alex from "../assets/photos/person-alex.jpg";
+import maya from "../assets/photos/person-maya.jpg";
+import jules from "../assets/photos/person-jules.jpg";
+import sam from "../assets/photos/person-sam.jpg";
+import sceneChat from "../assets/photos/scene-chat.jpg";
+import sceneStories from "../assets/photos/scene-stories.jpg";
+import sceneProfiles from "../assets/photos/scene-profiles.jpg";
+
+const panels = [
+  {
+    ...journeySteps[0],
+    image: sceneChat,
+    imageAlt: "Friends meeting over coffee",
+    people: [alex, maya],
+  },
+  {
+    ...journeySteps[1],
+    image: sceneStories,
+    imageAlt: "Friends sharing a moment on a phone",
+    people: [maya, jules, sam],
+  },
+  {
+    ...journeySteps[2],
+    image: sceneProfiles,
+    imageAlt: "Someone updating their profile outdoors",
+    people: [jules, alex, maya],
+  },
+] as const;
+---
+
+<section id="journey" class="scroll-mt-24 bg-surface-soft py-16 md:py-24" aria-labelledby="journey-heading">
+  <div class="site-shell">
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <h2 id="journey-heading" class="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+        A short guided tour
+      </h2>
+      <p class="mt-3 text-ink-muted">
+        Switch between Chat, Stories, and Profiles — three parts of the same calm experience.
+      </p>
+    </div>
+
+    <div
+      class="reveal reveal-delay-1 mt-10"
+      data-experience
+      role="region"
+      aria-label="Chat4Meet experience tabs"
+    >
+      <div
+        class="mx-auto flex max-w-xl flex-wrap justify-center gap-2 rounded-full border border-surface-border bg-white p-1.5 shadow-soft sm:flex-nowrap"
+        role="tablist"
+        aria-label="Experience"
+      >
+        {
+          panels.map((panel, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`experience-tab-${panel.id}`}
+              class="min-h-11 flex-1 rounded-full px-4 text-sm font-semibold transition"
+              data-experience-tab={index}
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={`experience-panel-${panel.id}`}
+            >
+              {index + 1}. {panel.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="relative mt-8 overflow-hidden rounded-[1.75rem] border border-surface-border bg-white shadow-soft">
+        <div class="story-track" data-experience-track>
+          {
+            panels.map((panel, index) => (
+              <article
+                class="story-slide grid gap-0 lg:grid-cols-2"
+                id={`experience-panel-${panel.id}`}
+                role="tabpanel"
+                aria-labelledby={`experience-tab-${panel.id}`}
+                data-experience-panel={index}
+              >
+                <div class="relative min-h-[280px] overflow-hidden bg-brand-soft lg:min-h-[420px]">
+                  <Image
+                    src={panel.image}
+                    alt={panel.imageAlt}
+                    width={900}
+                    height={1120}
+                    class="absolute inset-0 h-full w-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-5">
+                    <div class="flex -space-x-2">
+                      {panel.people.map((person) => (
+                        <Image
+                          src={person}
+                          alt=""
+                          width={44}
+                          height={44}
+                          class="h-11 w-11 rounded-full border-2 border-white object-cover"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col justify-center p-8 md:p-10">
+                  <h3 class="text-2xl font-bold tracking-tight text-ink md:text-3xl">
+                    {panel.label}: {panel.title}
+                  </h3>
+                  <p class="mt-4 text-[17px] leading-relaxed text-ink-muted">
+                    {panel.description}
+                  </p>
+                  <ul class="mt-7 space-y-3">
+                    {panel.points.map((point) => (
+                      <li class="flex gap-3 text-[15px] text-ink">
+                        <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between gap-3">
+        <button
+          type="button"
+          class="rounded-full border border-surface-border bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-brand hover:text-brand"
+          data-experience-prev
+          aria-label="Previous experience tab"
+        >
+          ← Prev
+        </button>
+        <p class="text-sm text-ink-muted" data-experience-status aria-live="polite">1 / 3</p>
+        <button
+          type="button"
+          class="rounded-full border border-surface-border bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-brand hover:text-brand"
+          data-experience-next
+          aria-label="Next experience tab"
+        >
+          Next →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

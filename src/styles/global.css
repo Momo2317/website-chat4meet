@@ -79,37 +79,6 @@
     animation: drift 14s var(--ease-out) infinite alternate;
   }
 
-  .phone-shell {
-    position: relative;
-    width: min(100%, 280px);
-    aspect-ratio: 9 / 19;
-    border-radius: 2.25rem;
-    padding: 0.55rem;
-    background: linear-gradient(160deg, var(--color-brand-deep), #045858 40%, #033f3f);
-    box-shadow: var(--shadow-lift);
-  }
-
-  .phone-shell::before {
-    content: "";
-    position: absolute;
-    top: 0.85rem;
-    left: 50%;
-    width: 34%;
-    height: 0.55rem;
-    transform: translateX(-50%);
-    border-radius: 999px;
-    background: #061616;
-    z-index: 2;
-  }
-
-  .phone-screen {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 1.75rem;
-    background: #f7fbfb;
-  }
-
   .story-ring {
     padding: 3px;
     border-radius: 999px;
