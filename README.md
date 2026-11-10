@@ -42,3 +42,7 @@ Bei eigener Domain `site` und `base` in `astro.config.mjs` anpassen.
 ## Lizenz
 
 Proprietär — Chat4Meet / MSquare.
+
+## Photo credits
+
+Lifestyle photography from [Pexels](https://www.pexels.com/) (free to use).

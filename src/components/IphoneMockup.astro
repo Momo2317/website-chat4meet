@@ -1,8 +1,4 @@
 ---
-/**
- * Classic phone silhouette: photo + UI live in the screen well,
- * SVG frame sits on top so the device always reads as an iPhone.
- */
 import frameUrl from "../assets/device/iphone-frame.svg?url";
 ---
 
@@ -23,16 +19,16 @@ import frameUrl from "../assets/device/iphone-frame.svg?url";
 <style>
   .phone-mock {
     position: relative;
-    width: min(100%, 320px);
+    width: min(100%, 300px);
     margin: 0 auto;
     aspect-ratio: 390 / 844;
-    filter: drop-shadow(0 30px 55px rgba(0, 35, 35, 0.4));
+    filter: drop-shadow(0 24px 40px rgba(0, 35, 35, 0.32));
   }
 
   .phone-mock__well {
     position: absolute;
-    /* Matches SVG screen hole (~95/390 x, 28/844 y …) */
-    inset: 3.3% 6.2% 3.1%;
+    /* Matches ~10px SVG bezel (27/390 ≈ 6.9%, 20/844 ≈ 2.4%) */
+    inset: 2.4% 6.9% 2.4%;
     overflow: hidden;
     border-radius: 34px;
     background: #111;
